@@ -17,5 +17,9 @@
     "mp4",
     "mcp",
     "webcodecs"
-  ]
+  ],
+  "documentationUrl": "https://github.com/alireza12t/foldline#mcp-server",
+  "supportUrl": "https://github.com/alireza12t/foldline/issues",
+  "privacyPolicyUrl": "https://github.com/alireza12t/foldline-claude-plugin/blob/main/PRIVACY.md",
+  "termsOfServiceUrl": "https://github.com/alireza12t/foldline-claude-plugin/blob/main/LICENSE"
 }

@@ -1,0 +1,34 @@
+# Fails when this copy drifts from Foldline: the skill must match the main repo's foldline-plugin/skills/foldline/SKILL.md,
+# and plugin.json's version must match the main repo's package.json. Fix it from the main repo with: sh tools/sync-claude-plugin.sh
+name: In sync with Foldline
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare with the main repo
+        run: |
+          set -e
+          RAW=https://raw.githubusercontent.com/alireza12t/foldline/main
+          curl -fsSL "$RAW/foldline-plugin/skills/foldline/SKILL.md" -o /tmp/SKILL.md
+          curl -fsSL "$RAW/package.json" -o /tmp/package.json
+          MAIN=$(node -p "require('/tmp/package.json').version")
+          HERE=$(node -p "require('./.claude-plugin/plugin.json').version")
+          NPM=$(npm view foldline-mcp version 2>/dev/null || echo unknown)
+          ok=1
+          if ! cmp -s /tmp/SKILL.md skills/foldline/SKILL.md; then
+            echo "::error::skills/foldline/SKILL.md differs from the main repo's foldline-plugin/skills/foldline/SKILL.md"
+            diff -u skills/foldline/SKILL.md /tmp/SKILL.md || true
+            ok=0
+          fi
+          if [ "$HERE" != "$MAIN" ]; then echo "::error::plugin.json version is $HERE, Foldline main is $MAIN"; ok=0; fi
+          if [ "$NPM" != "$MAIN" ]; then echo "::warning::foldline-mcp on npm is $NPM, Foldline main is $MAIN (not published yet?)"; fi
+          if [ "$ok" = 1 ]; then echo "in sync with Foldline $MAIN (npm $NPM)"; else echo "Fix: in the foldline repo run sh tools/sync-claude-plugin.sh, then commit and push here."; exit 1; fi

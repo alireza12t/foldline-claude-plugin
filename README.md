@@ -1,26 +1,30 @@
 # Foldline plugin for Claude
 
-Adds the [Foldline](https://github.com/alireza12t/foldline) MCP server to Claude. Foldline renders HTML canvas animations to MP4 fast on a Mac, and gives agents 66 code-made film styles, review stills, full renders, reading-time checks, TTS and loudness mastering.
+Adds a Foldline skill to Claude. [Foldline](https://github.com/alireza12t/foldline) renders HTML canvas animations to MP4 fast on a Mac, and ships 66 code-made film styles, review stills, reading-time checks, offline voice and loudness mastering. The skill tells Claude how to make a film with it: pick a style, build the page, check stills and text timing, render, and master the sound.
 
-The server comes from npm (`npx -y foldline-mcp@1.0.0`, pinned so the directory can check exactly what runs), so this repo only holds the plugin manifest. Foldline's code, docs and styles live in the [main repository](https://github.com/alireza12t/foldline).
+This is the copy listed in Anthropic's directory, so it holds the skill only. Foldline's code, docs and styles live in the [main repository](https://github.com/alireza12t/foldline).
 
 ## Needs
 
+- macOS with Apple Silicon (Windows and Linux are untested and slower)
 - Node 20+
 - ffmpeg: `brew install ffmpeg`
-- Chrome's headless shell: `npx playwright-core@1.63.0 install chromium-headless-shell`
 
-The server tells you if one is missing.
+The skill clones Foldline into `~/foldline` (or `$FOLDLINE_HOME`) the first time.
 
-## Install in Claude Code
+## Want the MCP tools too?
+
+Foldline also has an MCP server with tools for styles, stills, renders, voice and mastering. In Claude Code, install the full plugin (skill plus server):
 
 ```sh
 claude plugin install foldline --marketplace alireza12t/foldline
 ```
 
+or add just the server: `claude mcp add --scope user foldline -- npx -y foldline-mcp`. When the tools are there, the skill uses them.
+
 ## Privacy
 
-Foldline runs on your computer and collects nothing. A few steps use outside services, only when you run them: npm (installing the server), GitHub releases (`fetch_assets`), Hugging Face (the Whisper model for `check_voice`), and Microsoft's Edge text-to-speech when you choose `engine: "edge"` in `make_voice`, which sends the text of your lines. Details are in [PRIVACY.md](PRIVACY.md).
+Foldline runs on your computer and collects nothing. A few steps use outside services, only when you run them: GitHub and npm (getting Foldline and its packages), GitHub releases (voice model, HDRIs, instruments), Hugging Face (the Whisper model for checking voice lines), and Microsoft's Edge text-to-speech if you choose it instead of the offline Kokoro voice, which sends the text of your lines. Details are in [PRIVACY.md](PRIVACY.md).
 
 ## Licence
 

@@ -18,6 +18,10 @@ The server tells you if one is missing.
 claude plugin install foldline --marketplace alireza12t/foldline
 ```
 
+## Privacy
+
+Foldline runs on your computer and collects nothing. A few steps use outside services, only when you run them: npm (installing the server), GitHub releases (`fetch_assets`), Hugging Face (the Whisper model for `check_voice`), and Microsoft's Edge text-to-speech when you choose `engine: "edge"` in `make_voice`, which sends the text of your lines. Details are in [PRIVACY.md](PRIVACY.md).
+
 ## Licence
 
 Open source, free for non-commercial use ([PolyForm Noncommercial 1.0.0](LICENSE)). Making money with it needs a commercial licence: open an issue on the [main repository](https://github.com/alireza12t/foldline/issues) with "Commercial licence" in the title.

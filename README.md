@@ -2,7 +2,7 @@
 
 Adds the [Foldline](https://github.com/alireza12t/foldline) MCP server to Claude. Foldline renders HTML canvas animations to MP4 fast on a Mac, and gives agents 66 code-made film styles, review stills, full renders, reading-time checks, TTS and loudness mastering.
 
-The server comes from npm (`npx -y foldline-mcp`), so this repo only holds the plugin manifest. Foldline's code, docs and styles live in the [main repository](https://github.com/alireza12t/foldline).
+The server comes from npm (`npx -y foldline-mcp@1.0.0`, pinned so the directory can check exactly what runs), so this repo only holds the plugin manifest. Foldline's code, docs and styles live in the [main repository](https://github.com/alireza12t/foldline).
 
 ## Needs
 

@@ -2,7 +2,7 @@
   "mcpServers": {
     "foldline": {
       "command": "npx",
-      "args": ["-y", "foldline-mcp"]
+      "args": ["-y", "foldline-mcp@1.0.0"]
     }
   }
 }

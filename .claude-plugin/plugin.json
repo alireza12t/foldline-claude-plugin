@@ -1,7 +1,7 @@
 {
   "name": "foldline",
   "displayName": "Foldline",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Make films drawn entirely in code and render them to MP4 fast on a Mac with Foldline: 66 film styles, review stills, reading-time checks, offline voice and loudness mastering. Adds the Foldline skill.",
   "author": {
     "name": "Alireza Toghiani",
